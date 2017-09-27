@@ -95,7 +95,7 @@
     &-slide-fade-enter,
     &-slide-fade-appear,
     &-slide-fade-leave {
-        animation-duration: .3s;
+        animation-duration: .2s;
         animation-fill-mode: both;
         animation-timing-function: ease-out;
         animation-play-state: paused;
@@ -112,13 +112,13 @@
     &-fade-enter,
     &-fade-appear {
         opacity: 0;
-        animation-duration: .3s;
+        animation-duration: .2s;
         animation-fill-mode: both;
         animation-timing-function: cubic-bezier(.55, 0, .55, .2);
         animation-play-state: paused;
     }
     &-fade-leave {
-        animation-duration: .3s;
+        animation-duration: .2s;
         animation-fill-mode: both;
         animation-timing-function: cubic-bezier(.55, 0, .55, .2);
         animation-play-state: paused;

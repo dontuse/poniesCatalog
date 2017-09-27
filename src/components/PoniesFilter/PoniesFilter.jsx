@@ -58,8 +58,8 @@ export class PoniesFilter extends Component {
   };
 
   renderRangeFilter = (filter, name, labelText) => {
-    let toNode;
-    let fromNode;
+    let $toNode;
+    let $fromNode;
     this.rangeControls[name] = {};
 
     return (
@@ -67,17 +67,17 @@ export class PoniesFilter extends Component {
         <label className={b("label")()}>{labelText}</label>
         <RangeControl
           inputRef={node => {
-            this.rangeControls[name].from = fromNode = node;
+            this.rangeControls[name].from = $fromNode = node;
           }}
-          onBlur={e => this.handleChangeFilter({ from: +e.target.value, to: +toNode.value }, name)}
+          onBlur={e => this.handleChangeFilter({ from: +e.target.value, to: +$toNode.value }, name)}
           label={"От"}
         />
         <RangeControl
           inputRef={node => {
-            this.rangeControls[name].to = toNode = node;
+            this.rangeControls[name].to = $toNode = node;
           }}
           onBlur={e =>
-            this.handleChangeFilter({ to: +e.target.value, from: +fromNode.value }, name)}
+            this.handleChangeFilter({ from: +$fromNode.value, to: +e.target.value }, name)}
           label={"До"}
         />
       </div>
