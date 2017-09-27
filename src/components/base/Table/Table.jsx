@@ -12,8 +12,10 @@ class Table extends Component {
     const { mix, ...rest } = this.props;
 
     return (
-      <div className={b.mix(mix)} {...rest}>
-        <table className={b("table")}>{rest.children}</table>
+      <div className={b.mix(mix)()} {...rest}>
+        <table className={b("table")()}>
+          <tbody>{rest.children}</tbody>
+        </table>
       </div>
     );
   }

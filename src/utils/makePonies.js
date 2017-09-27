@@ -3,6 +3,7 @@ import { names, colors, kinds, isNew } from "../constants/ponyData";
 
 export default count => {
   const ponies = [];
+
   for (let i = 0; i < count; i++) {
     let pony = {
       name: names[Math.floor(Math.random() * names.length)],
@@ -14,6 +15,6 @@ export default count => {
     };
     ponies.push(pony);
   }
-  console.log(ponies);
+
   return ponies;
 };

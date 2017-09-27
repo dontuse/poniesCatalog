@@ -34,8 +34,8 @@ export class PoniesFilter extends Component {
     const selected = filters.find(el => el.slug === this.props.selectedFilters[name]);
 
     return (
-      <div className={b("col")}>
-        <label className={b("label")} htmlFor={name}>
+      <div className={b("col")()}>
+        <label className={b("label")()} htmlFor={name}>
           {labelText}:
         </label>
         <select
@@ -62,8 +62,8 @@ export class PoniesFilter extends Component {
     this.rangeControls[name] = {};
 
     return (
-      <div className={b("range-box")}>
-        <label className={b("label")}>{labelText}</label>
+      <div className={b("range-box")()}>
+        <label className={b("label")()}>{labelText}</label>
         <div>
           <label htmlFor="">От</label>
           <input
@@ -73,7 +73,7 @@ export class PoniesFilter extends Component {
             }}
             onBlur={e =>
               this.handleChangeFilter({ from: +e.target.value, to: +toNode.value }, name)}
-            className={b("range-input")}
+            className={b("range-input")()}
             type="number"
           />
         </div>
@@ -86,7 +86,7 @@ export class PoniesFilter extends Component {
             }}
             onBlur={e =>
               this.handleChangeFilter({ to: +e.target.value, from: +fromNode.value }, name)}
-            className={b("range-input")}
+            className={b("range-input")()}
             type="number"
           />
         </div>
@@ -99,7 +99,7 @@ export class PoniesFilter extends Component {
 
     return (
       <div className={b.mix(props.mix)}>
-        <section className={b("box")}>
+        <section className={b("box")()}>
           {this.renderFilter(props.colors, "color", "Цвет:")}
           {this.renderFilter(props.kinds, "kind", "Вид:")}
           {this.renderRangeFilter(props.price, "price", "Цена:")}

@@ -9,7 +9,7 @@ class Tr extends Component {
     const { mix, ...rest } = this.props;
 
     return (
-      <tr className={b("row").mix(mix)} {...rest}>
+      <tr className={b("row").mix(mix)()} {...rest}>
         {rest.children}
       </tr>
     );

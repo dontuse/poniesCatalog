@@ -16,17 +16,17 @@ class Header extends Component {
   render() {
     return (
       <header className={b()}>
-        <section className={b("col")}>
+        <section className={b("col")()}>
           <a onClick={this.handleClick} href="">
             Фильтровать пони.
           </a>
         </section>
-        <section className={b("col")}>
+        <section className={b("col")()}>
           <a onClick={this.handleClick} href="">
             Фильтровать пони 2.
           </a>
         </section>
-        <section className={b("col")}>
+        <section className={b("col")()}>
           <PonyFilterLnk>
             <b>
               <i>Фильтровать пони 3.</i>

@@ -9,7 +9,7 @@ class Td extends Component {
     const { mix, ...rest } = this.props;
 
     return (
-      <td className={b("td").mix(mix)} {...rest}>
+      <td className={b("td").mix(mix)()} {...rest}>
         {rest.children}
       </td>
     );

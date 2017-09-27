@@ -17,8 +17,8 @@
     "prettier": "^1.7.0",
     "rc-dialog": "^6.5.11",
     "rc-pagination": "^1.12.9",
-    "react": "^15.6.1",
-    "react-dom": "^15.6.1",
+    "react": "^16.0.0",
+    "react-dom": "^16.0.0",
     "react-scripts": "1.0.13",
     "redux": "^3.7.2"
   },
