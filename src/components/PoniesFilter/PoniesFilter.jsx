@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { block } from "../../utils";
 import { colors, kinds, isNew } from "../../constants/ponyData";
 import { setFilter as setFilterForPonies } from "../../actions/ponies";
+import RangeControl from "./RangeControl";
 import "./PoniesFilter.css";
 
 const b = block("PoniesFilter");
@@ -36,7 +37,7 @@ export class PoniesFilter extends Component {
     return (
       <div className={b("col")()}>
         <label className={b("label")()} htmlFor={name}>
-          {labelText}:
+          {labelText}
         </label>
         <select
           value={selected ? selected.slug : "-"}
@@ -62,34 +63,23 @@ export class PoniesFilter extends Component {
     this.rangeControls[name] = {};
 
     return (
-      <div className={b("range-box")()}>
+      <div className={b("range-box").mix(b("col"))()}>
         <label className={b("label")()}>{labelText}</label>
-        <div>
-          <label htmlFor="">От</label>
-          <input
-            ref={node => {
-              fromNode = node;
-              this.rangeControls[name].from = fromNode;
-            }}
-            onBlur={e =>
-              this.handleChangeFilter({ from: +e.target.value, to: +toNode.value }, name)}
-            className={b("range-input")()}
-            type="number"
-          />
-        </div>
-        <div>
-          <label htmlFor="">До</label>
-          <input
-            ref={node => {
-              toNode = node;
-              this.rangeControls[name].to = toNode;
-            }}
-            onBlur={e =>
-              this.handleChangeFilter({ to: +e.target.value, from: +fromNode.value }, name)}
-            className={b("range-input")()}
-            type="number"
-          />
-        </div>
+        <RangeControl
+          inputRef={node => {
+            this.rangeControls[name].from = fromNode = node;
+          }}
+          onBlur={e => this.handleChangeFilter({ from: +e.target.value, to: +toNode.value }, name)}
+          label={"От"}
+        />
+        <RangeControl
+          inputRef={node => {
+            this.rangeControls[name].to = toNode = node;
+          }}
+          onBlur={e =>
+            this.handleChangeFilter({ to: +e.target.value, from: +fromNode.value }, name)}
+          label={"До"}
+        />
       </div>
     );
   };
