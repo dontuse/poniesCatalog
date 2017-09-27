@@ -44,7 +44,7 @@ const ponies = (state = initState, action) => {
           });
 
           rangeProps.forEach(prop => {
-            const min = state.filter[prop].from || 0;
+            const min = state.filter[prop].from || Number.MIN_SAFE_INTEGER;
             const max = state.filter[prop].to || Number.MAX_SAFE_INTEGER;
 
             item[prop] > min && item[prop] < max && rangeCounter++;
@@ -56,7 +56,9 @@ const ponies = (state = initState, action) => {
 
       return {
         ...state,
-        filteredItems: _shuffle(filterPonies()).slice(0, 20)
+        filteredItems: _shuffle(filterPonies())
+          .slice(0, 20)
+          .map(pony => pony.id)
       };
     }
 

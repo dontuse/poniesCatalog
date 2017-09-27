@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import RcDialog from "rc-dialog";
 import "./Dialog.css";
 
-class Dialog extends React.Component {
+class Dialog extends Component {
   render() {
     return (
       <RcDialog animation="slide-fade" maskAnimation="fade" {...this.props}>

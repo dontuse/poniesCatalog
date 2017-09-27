@@ -29,7 +29,7 @@ export class PoniesList extends Component {
 }
 
 const mapStateToProps = state => ({
-  ponies: state.ponies.filteredItems
+  ponies: state.ponies.filteredItems.map(id => state.ponies.items.find(pony => pony.id === id))
 });
 
 export default connect(mapStateToProps)(PoniesList);
