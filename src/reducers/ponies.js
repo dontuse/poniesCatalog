@@ -19,8 +19,7 @@ const ponies = (state = initState, action) => {
     case PONIES_RECEIVE:
       return {
         ...initState,
-        items: action.payload.ponies,
-        filteredItems: action.payload.ponies
+        items: action.payload.ponies
       };
 
     case PONIES_FILTER: {
