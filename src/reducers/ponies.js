@@ -46,7 +46,7 @@ const ponies = (state = initState, action) => {
             const min = state.filter[prop].from || Number.MIN_SAFE_INTEGER;
             const max = state.filter[prop].to || Number.MAX_SAFE_INTEGER;
 
-            item[prop] > min && item[prop] < max && rangeCounter++;
+            item[prop] >= min && item[prop] <= max && rangeCounter++;
           });
 
           return equalCounter === equalProps.length && rangeCounter === rangeProps.length;
