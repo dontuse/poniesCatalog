@@ -9,9 +9,8 @@ export const get = data => ({
   payload: data
 });
 
-export const filter = data => ({
-  type: PONIES_FILTER,
-  payload: data
+export const filter = () => ({
+  type: PONIES_FILTER
 });
 
 export const setFilter = data => ({
