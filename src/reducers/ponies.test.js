@@ -1,3 +1,4 @@
+import Immutable from "seamless-immutable";
 import reducer from "./ponies";
 import * as types from "../actions/ponies";
 
@@ -23,7 +24,7 @@ describe("ponies reducer", () => {
   it("Должен обработать PONIES_RECEIVE", () => {
     expect(
       reducer(
-        initState,
+        Immutable(initState),
         types.get({
           ponies: [
             {
@@ -71,7 +72,7 @@ describe("ponies reducer", () => {
   });
 
   it("Должен обработать PONIES_SHOW_FILTER", () => {
-    expect(reducer(initState, types.showFilter(true))).toEqual({
+    expect(reducer(Immutable(initState), types.showFilter(true))).toEqual({
       filter: {},
       filteredItems: [],
       items: [],
@@ -81,15 +82,22 @@ describe("ponies reducer", () => {
 
   describe("Установка фильтров PONIES_SET_FILTER", () => {
     it("Должен добавить фильтр", () => {
+      expect(reducer(Immutable(initState), types.setFilter({ color: "red" }))).toEqual({
+        filter: { color: "red" },
+        filteredItems: [],
+        items: [],
+        showFilter: false
+      });
+    });
+
+    it("Должен установить несколько фильтров", () => {
       expect(
         reducer(
-          initState,
-          types.setFilter({
-            color: "red"
-          })
+          Immutable(initState),
+          types.setFilter({ color: "red", price: { from: 1, to: 100 } })
         )
       ).toEqual({
-        filter: { color: "red" },
+        filter: { color: "red", price: { from: 1, to: 100 } },
         filteredItems: [],
         items: [],
         showFilter: false
@@ -106,7 +114,7 @@ describe("ponies reducer", () => {
 
       expect(
         reducer(
-          initState,
+          Immutable(initState),
           types.setFilter({
             price: {
               from: 30,
@@ -163,7 +171,7 @@ describe("ponies reducer", () => {
         showFilter: false
       };
 
-      const result = reducer(initState, types.filter());
+      const result = reducer(Immutable(initState), types.filter());
 
       expect(result.filteredItems).toEqual(expect.arrayContaining([1, 2553, 255]));
     });
@@ -210,7 +218,7 @@ describe("ponies reducer", () => {
         showFilter: false
       };
 
-      const result = reducer(initState, types.filter());
+      const result = reducer(Immutable(initState), types.filter());
       expect(result.filteredItems).toHaveLength(3);
       expect(result.filteredItems).toEqual(expect.arrayContaining([1, 2, 3]));
     });
@@ -249,7 +257,7 @@ describe("ponies reducer", () => {
         showFilter: false
       };
 
-      const result = reducer(initState, types.filter());
+      const result = reducer(Immutable(initState), types.filter());
 
       expect(result.filteredItems).toHaveLength(2);
       expect(result.filteredItems).toEqual(expect.arrayContaining([1, 3]));
@@ -308,7 +316,7 @@ describe("ponies reducer", () => {
         showFilter: false
       };
 
-      const result = reducer(initState, types.filter());
+      const result = reducer(Immutable(initState), types.filter());
 
       expect(result.filteredItems).toHaveLength(3);
       expect(result.filteredItems).toEqual(expect.arrayContaining([1, 3, 6]));
