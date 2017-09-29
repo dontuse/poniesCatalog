@@ -27,24 +27,21 @@ const ponies = (state = initState, action) => {
       const rangeFields = ["price"];
 
       const filterPonies = () => {
-        const equalProps = Object.keys(state.items[0]).filter(
-          elem => equalFields.includes(elem) && state.filter[elem] !== undefined
-        );
-        const rangeProps = Object.keys(state.items[0]).filter(
-          elem => rangeFields.includes(elem) && state.filter[elem] !== undefined
-        );
+        const { filter } = state;
+        const equalProps = Object.keys(filter).filter(elem => equalFields.includes(elem));
+        const rangeProps = Object.keys(filter).filter(elem => rangeFields.includes(elem));
 
         return state.items.filter(item => {
           let equalCounter = 0;
           let rangeCounter = 0;
 
           equalProps.forEach(prop => {
-            item[prop] === state.filter[prop] && equalCounter++;
+            item[prop] === filter[prop] && equalCounter++;
           });
 
           rangeProps.forEach(prop => {
-            const min = state.filter[prop].from || Number.MIN_SAFE_INTEGER;
-            const max = state.filter[prop].to || Number.MAX_SAFE_INTEGER;
+            const min = filter[prop].from || Number.MIN_SAFE_INTEGER;
+            const max = filter[prop].to || Number.MAX_SAFE_INTEGER;
 
             item[prop] >= min && item[prop] <= max && rangeCounter++;
           });
