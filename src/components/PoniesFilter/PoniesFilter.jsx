@@ -31,18 +31,29 @@ export class PoniesFilter extends Component {
     this.props.dispatch(setFilterForPonies({ [name]: value }));
   };
 
-  renderFilter = (filters, name, labelText) => {
-    const selected = filters.find(el => el.slug === this.props.selectedFilters[name]);
-
+  renderFilter = (filters, name, labelText, multiple) => {
     return (
       <div className={b("col")()}>
         <label className={b("label")()} htmlFor={name}>
           {labelText}
         </label>
         <select
-          value={selected ? selected.slug : "-"}
+          multiple={multiple}
+          value={this.props.selectedFilters[name] || "-"}
           id={name}
-          onChange={e => this.handleChangeFilter(e.target.value, name)}
+          onChange={e => {
+            let value;
+
+            if (multiple) {
+              value = Array.from(e.target.options)
+                .filter(o => o.selected)
+                .map(o => o.value);
+            } else {
+              value = e.target.value;
+            }
+
+            this.handleChangeFilter(value, name);
+          }}
         >
           <option key={undefined} value={"-"}>
             -
@@ -88,10 +99,10 @@ export class PoniesFilter extends Component {
     const { props } = this;
 
     return (
-      <div className={b.mix(props.mix)}>
+      <div className={b.mix(props.mix)()}>
         <section className={b("box")()}>
           {this.renderFilter(props.colors, "color", "Цвет:")}
-          {this.renderFilter(props.kinds, "kind", "Вид:")}
+          {this.renderFilter(props.kinds, "kind", "Вид:", true)}
           {this.renderRangeFilter(props.price, "price", "Цена:")}
           {this.renderFilter(props.isNew, "is_new", "Новинка:")}
         </section>

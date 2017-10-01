@@ -135,6 +135,14 @@ describe("ponies reducer", () => {
         showFilter: false
       });
     });
+
+    it("Установить фильр массив", () => {
+      const filter = { kind: ["some-kind-1", "some-kind-2"] };
+      const state = { ...initState, filter };
+      const result = reducer(Immutable(state), types.setFilter(filter));
+
+      expect(result.filter).toEqual(filter);
+    });
   });
 
   describe("Тестирование фильтров", () => {
@@ -317,6 +325,65 @@ describe("ponies reducer", () => {
       };
 
       const result = reducer(Immutable(initState), types.filter());
+
+      expect(result.filteredItems).toHaveLength(3);
+      expect(result.filteredItems).toEqual(expect.arrayContaining([1, 3, 6]));
+    });
+
+    it("Отфильтровать - поле equal является массивом", () => {
+      const state = {
+        ...initState,
+        ...{
+          filter: { kind: ["Нужный", "Нужный2"], color: "Голубой" },
+          items: [
+            {
+              // ok
+              name: "Бетман",
+              color: "Голубой",
+              kind: "Нужный2",
+              price: 2.26,
+              is_new: false,
+              id: 1
+            },
+            {
+              // ok
+              name: "ваь жалхЙЭА ЩАЛщуцлацщалцщалАЖЬау",
+              color: "Голубой",
+              kind: "Нужный",
+              price: 32.26,
+              is_new: true,
+              id: 3
+            },
+            {
+              name: "ваь жалхЙЭА ЩАЛщуцлацщалцщалАЖЬау",
+              color: "wer",
+              kind: "Нужнываываываый",
+              price: 32.26,
+              is_new: true,
+              id: 4
+            },
+            {
+              name: "ваь жалхЙЭА ЩАЛщуцлацщалцщалАЖЬау",
+              color: "Голубой",
+              kind: "Лбоййцвлц",
+              price: 132.26,
+              is_new: true,
+              id: 5
+            },
+            {
+              // ok
+              name: "ваь жалхЙЭА ЩАЛщуцлацщалцщалАЖЬау",
+              color: "Голубой",
+              kind: "Нужный2",
+              price: 322.26,
+              is_new: true,
+              id: 6
+            }
+          ]
+        }
+      };
+
+      const result = reducer(Immutable(state), types.filter());
 
       expect(result.filteredItems).toHaveLength(3);
       expect(result.filteredItems).toEqual(expect.arrayContaining([1, 3, 6]));

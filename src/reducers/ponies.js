@@ -36,7 +36,11 @@ const ponies = (state = initState, action) => {
           let rangeCounter = 0;
 
           equalProps.forEach(prop => {
-            item[prop] === filter[prop] && equalCounter++;
+            if (Array.isArray(filter[prop])) {
+              filter[prop].includes(item[prop]) && equalCounter++;
+            } else {
+              item[prop] === filter[prop] && equalCounter++;
+            }
           });
 
           rangeProps.forEach(prop => {

@@ -10,6 +10,7 @@ const b = block("PonyList");
 export class PoniesList extends Component {
   render() {
     const { ponies } = this.props;
+
     return (
       <div className={b()}>
         <Table>
@@ -21,7 +22,7 @@ export class PoniesList extends Component {
             <Th>Новый</Th>
             <Th>#</Th>
           </Tr>
-          {ponies.map((pony, index) => <Pony key={index} index={index} pony={pony} />)}
+          {ponies.map((pony, index) => <Pony key={pony.id} index={index} pony={pony} />)}
         </Table>
       </div>
     );
