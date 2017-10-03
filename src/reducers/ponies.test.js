@@ -146,7 +146,7 @@ describe("ponies reducer", () => {
   });
 
   describe("Тестирование фильтров", () => {
-    it("Должен обработать PONIES_FILTER c пустыми фильтрами ", () => {
+    it("Должен обработать PONIES_FILTER c пустыми фильтрами и undefined полями ", () => {
       const initState = {
         items: [
           {
@@ -179,9 +179,15 @@ describe("ponies reducer", () => {
         showFilter: false
       };
 
+      const state = { ...initState, filter: { color: undefined } };
+
       const result = reducer(Immutable(initState), types.filter());
+      const resultWithUndefinedFields = reducer(Immutable(state), types.filter());
 
       expect(result.filteredItems).toEqual(expect.arrayContaining([1, 2553, 255]));
+      expect(resultWithUndefinedFields.filteredItems).toEqual(
+        expect.arrayContaining([1, 2553, 255])
+      );
     });
 
     it("Должен обработать PONIES_FILTER c фильтром цены От - До", () => {

@@ -27,11 +27,15 @@ export class PoniesFilter extends Component {
     if (value === "true") value = true;
     if (value === "false") value = false;
     if (value === "-") value = undefined;
+    if (Array.isArray(value) && value.includes("-")) value = undefined;
 
     this.props.dispatch(setFilterForPonies({ [name]: value }));
   };
 
   renderFilter = (filters, name, labelText, multiple) => {
+    const value =
+      this.props.selectedFilters[name] !== undefined ? this.props.selectedFilters[name] : "-";
+
     return (
       <div className={b("col")()}>
         <label className={b("label")()} htmlFor={name}>
@@ -39,7 +43,7 @@ export class PoniesFilter extends Component {
         </label>
         <select
           multiple={multiple}
-          value={this.props.selectedFilters[name] || "-"}
+          value={value}
           id={name}
           onChange={e => {
             let value;

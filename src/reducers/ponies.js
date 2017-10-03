@@ -28,8 +28,12 @@ const ponies = (state = initState, action) => {
 
       const filterPonies = () => {
         const { filter } = state;
-        const equalProps = Object.keys(filter).filter(elem => equalFields.includes(elem));
-        const rangeProps = Object.keys(filter).filter(elem => rangeFields.includes(elem));
+        const equalProps = Object.keys(filter).filter(
+          elem => equalFields.includes(elem) && filter[elem] !== undefined
+        );
+        const rangeProps = Object.keys(filter).filter(
+          elem => rangeFields.includes(elem) && filter[elem] !== undefined
+        );
 
         return state.items.filter(item => {
           let equalCounter = 0;
